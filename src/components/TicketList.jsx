@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import TicketCard from './TicketCard';
 import { ticketAPI } from '../services/api';
@@ -9,11 +9,7 @@ const TicketList = ({ filter, refreshTrigger }) => {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    fetchTickets();
-  }, [filter, refreshTrigger]);
-
-  const fetchTickets = async () => {
+  const fetchTickets = useCallback(async () => {
     try {
       setLoading(true);
       const data = await ticketAPI.getAllTickets(filter);
@@ -25,7 +21,11 @@ const TicketList = ({ filter, refreshTrigger }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets, refreshTrigger]);
 
   const filteredTickets = tickets.filter(ticket =>
     ticket.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
