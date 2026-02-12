@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SidebarIcons from './SidebarIcons';
 import TicketViewsSidebar from './TicketViewsSidebar';
 import TicketList from './TicketList';
@@ -7,15 +7,24 @@ import RightPanel from './RightPanel';
 import AddTicketButton from './AddTicketButton';
 
 const Dashboard = () => {
+  const [activeFilter, setActiveFilter] = useState('mytickets');
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
   const handleTicketAdded = () => {
-    // Refresh the ticket list - you can add state management here if needed
-    window.location.reload();
+    setRefreshTrigger(prev => prev + 1);
+  };
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
   };
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
       <SidebarIcons />
-      <TicketViewsSidebar />
+      <TicketViewsSidebar 
+        activeFilter={activeFilter}
+        onFilterChange={handleFilterChange}
+      />
       
       <div className="flex-1 flex flex-col">
         <div className="p-4 bg-white border-b border-gray-200">
@@ -26,7 +35,10 @@ const Dashboard = () => {
         </div>
         
         <div className="flex flex-1 overflow-hidden">
-          <TicketList />
+          <TicketList 
+            filter={activeFilter}
+            refreshTrigger={refreshTrigger}
+          />
           <TicketDetails />
           <RightPanel />
         </div>

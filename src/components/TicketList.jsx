@@ -3,7 +3,7 @@ import { FiSearch, FiChevronDown } from 'react-icons/fi';
 import TicketCard from './TicketCard';
 import { ticketAPI } from '../services/api';
 
-const TicketList = () => {
+const TicketList = ({ filter, refreshTrigger }) => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,12 +11,12 @@ const TicketList = () => {
 
   useEffect(() => {
     fetchTickets();
-  }, []);
+  }, [filter, refreshTrigger]);
 
   const fetchTickets = async () => {
     try {
       setLoading(true);
-      const data = await ticketAPI.getAllTickets();
+      const data = await ticketAPI.getAllTickets(filter);
       setTickets(data);
       setError(null);
     } catch (err) {

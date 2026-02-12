@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = '/api';
 
 // Create axios instance
 const api = axios.create({
@@ -12,10 +12,11 @@ const api = axios.create({
 
 // Ticket API functions
 export const ticketAPI = {
-  // Get all tickets
-  getAllTickets: async () => {
+  // Get all tickets with optional filter
+  getAllTickets: async (filter = null) => {
     try {
-      const response = await api.get('/tickets');
+      const url = filter ? `/tickets?filter=${filter}` : '/tickets';
+      const response = await api.get(url);
       return response.data;
     } catch (error) {
       console.error('Error fetching tickets:', error);
