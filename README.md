@@ -2,19 +2,27 @@
 
 A pixel-perfect ReactJS implementation of a modern Helpdesk Ticketing dashboard with a clean, professional UI.
 
-## Features
+## 🚀 Live Demo
+**[View on Netlify](https://your-netlify-url.netlify.app)** - Deployed and ready to use!
+
+## ✨ Features
 
 - **Modern UI Design**: Pixel-perfect recreation of the Helpdesk interface
 - **Fully Responsive**: Works seamlessly across all device sizes
 - **Component-Based Architecture**: Clean, reusable React components
 - **Tailwind CSS Styling**: Utility-first CSS framework for rapid development
+- **Backend Integration**: REST API with filtering capabilities
+- **Smart Fallback**: Works with mock data when backend is unavailable
+- **Filter Views**: My Tickets, Past Due, High Priority, Unassigned, All Tickets
 - **No External UI Libraries**: Built from scratch without MUI or Bootstrap
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - **ReactJS** (v18.2.0) - Modern React with functional components and hooks
 - **Tailwind CSS** (v3.4.1) - Utility-first CSS framework
 - **React Icons** (v5.0.1) - Popular icon library
+- **Axios** (v1.13.5) - HTTP client for API calls
+- **Express.js** - Backend REST API server
 - **React Scripts** (v5.0.1) - Create React App build tools
 
 ## Project Structure
